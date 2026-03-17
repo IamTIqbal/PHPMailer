@@ -1,3 +1,7 @@
+
+// IMPORTANT: When registering your Azure app for XOAUTH2, ensure you set the app type as "web" (not public/native client),
+// and use a web address as the redirect URI. Using the wrong type or a local/private redirect URI will cause errors like:
+// "Client is public so neither 'client_assertion' nor 'client_secret' should be presented" (see PHPMailer issue #3300).
 <?php
 
 /**
