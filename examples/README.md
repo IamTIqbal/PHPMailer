@@ -1,4 +1,18 @@
-[![PHPMailer logo](images/phpmailer.png)](https://github.com/PHPMailer/PHPMailer)
+# [![PHPMailer logo](images/phpmailer.png)](https://github.com/PHPMailer/PHPMailer)
+
+## Security checklist (important!)
+
+To avoid exposing your SMTP credentials or making your server a spam gateway, always:
+
+- **Never store credentials or config files in web-accessible locations.** Place them outside your web root.
+- **Do not display error/debug output in production.** Log errors securely instead.
+- **Sanitize and validate all user input.**
+- **Audit your code for file inclusion or arbitrary file access vulnerabilities.**
+- **Rotate credentials if you suspect compromise.**
+- **Keep your server and dependencies up to date.**
+
+See [issue #3305](https://github.com/PHPMailer/PHPMailer/issues/3305) for a real-world example of what can go wrong if these steps are not followed.
+
 # PHPMailer code examples
 
 This folder contains a collection of examples of using [PHPMailer](https://github.com/PHPMailer/PHPMailer).
@@ -7,18 +21,19 @@ This folder contains a collection of examples of using [PHPMailer](https://githu
 
 When working on email sending code you'll find yourself worrying about what might happen if all these test emails got sent to your mailing list. The solution is to use a fake mail server, one that acts just like the real thing, but just doesn't actually send anything out. Some offer web interfaces, feedback, logging, the ability to return specific error codes, all things that are useful for testing error handling, authentication etc. Here's a selection of mail testing tools you might like to try:
 
-*   [FakeEmail](https://github.com/tomwardill/FakeEmail), a Python-based fake mail server with a web interface.
-*   [smtp-sink](https://www.postfix.org/smtp-sink.1.html), part of the Postfix mail server, so you may have this installed already. This is used in the GitHub actions configuration to run PHPMailer's unit tests.
-*   [smtp4dev](https://github.com/rnwood/smtp4dev), a dummy SMTP server for Windows and Linux.
-*   [fakesendmail.sh](https://github.com/PHPMailer/PHPMailer/blob/master/test/fakesendmail.sh), part of PHPMailer's test setup, this is a shell script that emulates sendmail for testing 'mail' or 'sendmail' methods in PHPMailer.
-*   [HELO](https://usehelo.com), a very nice (commercial) mail server desktop app from BeyondCode, and [how to set it up for local testing](https://usehelo.com/blog/how-to-use-helo-with-phps-mail-function).
-*   [msglint](https://www.splitbrain.org/_static/msglint/), not a mail server, the IETF's MIME structure analyser checks the formatting of your messages.
-*   [MailHog](https://github.com/les-enovateurs/mailhog-examples), a Go-based email testing tool for developers with a web interface. You can use it with Docker and GitHub Actions to test your mails. The repository also contains a small part of PHPMailer's setup.
-*   [aboutmy.email](https://aboutmy.email), a service for evaluating your email config – SPF, DKIM, DMARC, and compliance with list-unsubscribe, TLS, and many other settings.
+- [FakeEmail](https://github.com/tomwardill/FakeEmail), a Python-based fake mail server with a web interface.
+- [smtp-sink](https://www.postfix.org/smtp-sink.1.html), part of the Postfix mail server, so you may have this installed already. This is used in the GitHub actions configuration to run PHPMailer's unit tests.
+- [smtp4dev](https://github.com/rnwood/smtp4dev), a dummy SMTP server for Windows and Linux.
+- [fakesendmail.sh](https://github.com/PHPMailer/PHPMailer/blob/master/test/fakesendmail.sh), part of PHPMailer's test setup, this is a shell script that emulates sendmail for testing 'mail' or 'sendmail' methods in PHPMailer.
+- [HELO](https://usehelo.com), a very nice (commercial) mail server desktop app from BeyondCode, and [how to set it up for local testing](https://usehelo.com/blog/how-to-use-helo-with-phps-mail-function).
+- [msglint](https://www.splitbrain.org/_static/msglint/), not a mail server, the IETF's MIME structure analyser checks the formatting of your messages.
+- [MailHog](https://github.com/les-enovateurs/mailhog-examples), a Go-based email testing tool for developers with a web interface. You can use it with Docker and GitHub Actions to test your mails. The repository also contains a small part of PHPMailer's setup.
+- [aboutmy.email](https://aboutmy.email), a service for evaluating your email config – SPF, DKIM, DMARC, and compliance with list-unsubscribe, TLS, and many other settings.
 
 Most of these examples use the `example.com` and `example.net` domains. These domains are reserved by IANA for illustrative purposes, as documented in [RFC 2606](https://www.rfc-editor.org/rfc/rfc2606). Don't use made-up domains like 'mydomain.com' or 'somedomain.com' in examples as someone, somewhere, probably owns them!
 
 ## Security note
+
 Before running these examples in a web server, you'll need to rename them with '.php' extensions. They are supplied as '.phps' files which will usually be displayed with syntax highlighting by PHP instead of running them. This prevents potential security issues with running potential spam-gateway code if you happen to deploy these code examples on a live site - _please don't do that!_
 
 Similarly, don't leave your passwords in these files as they will be visible to the world!
@@ -83,7 +98,7 @@ PHP 5.6 introduced SSL certificate verification by default, and this applies to 
 
 An example of how to sign messages using [S/MIME](https://en.wikipedia.org/wiki/S/MIME), ensuring that your data can't be tampered with in transit, and proves to recipients that it was you that sent it.
 
-* * *
+---
 
 ## [smtp_check.phps](smtp_check.phps)
 
@@ -93,4 +108,4 @@ This is an example showing how to use the SMTP class by itself (without PHPMaile
 
 This demonstrates how to extend the SMTP class and make PHPMailer use it. In this case it's an effort to make the SMTP class use less memory when sending large attachments.
 
-* * *
+---
